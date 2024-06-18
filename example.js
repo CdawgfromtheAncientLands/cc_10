@@ -8,19 +8,15 @@ function createListItem(order) {
     listItem.textContent = order.customerName + " - Order ID: " + order.orderId + " - Amount: " + USDconvert(order.purchaseAmount);
     return listItem;
 }
-
 // Function to append list item to the receiver list
 function appendListItem(listItem, receiverList) {
     let list = document.querySelector(receiverList);
-    if (list) {
         list.appendChild(listItem);
-    } else {
-        console.error("Improper designation of list for data display");
-    }
+
 }
 
 // Function to process CSV data
-function processCSV(data, receiverList) {
+function createAndAppend(data, receiverList) {
     // 'data' here will be an array of objects (one for each row in the CSV)
     data.forEach(function(order) {
         let listItem = createListItem(order);
@@ -43,5 +39,5 @@ var receiverList = "#purchase-orders";
 
 // Call the fetchAndFeed function on DOM load
 document.addEventListener("DOMContentLoaded", function() {
-    fetchAndFeed(csv1, processCSV, receiverList);
+    fetchAndFeed(csv1, createAndAppend, receiverList);
 });
